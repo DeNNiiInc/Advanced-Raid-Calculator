@@ -2,7 +2,7 @@
 
 ![Advanced RAID Calculator](initial_calculator_view_1765786674589.png)
 
-A professional storage capacity planning tool for various RAID configurations, including standard RAID, Synology SHR, ZFS, and Unraid. Built by [Beyond Cloud Technology](https://www.youtube.com/@beyondcloudtechnology).
+A professional storage capacity planning tool for various RAID configurations, including standard RAID, Synology SHR, ZFS, and Unraid. Built by [Beyond Cloud Technology](https://www.youtube.com/@beyondcloudtechnology)..
 
 ## 🌟 Features
 

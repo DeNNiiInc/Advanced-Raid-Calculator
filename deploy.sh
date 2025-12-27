@@ -25,4 +25,8 @@ else
     # node server.js
 fi
 
+# Run the proxy setup script
+chmod +x setup-proxy.sh
+./setup-proxy.sh
+
 echo "Deployment complete."

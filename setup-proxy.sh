@@ -39,7 +39,7 @@ EOF
 # Remove default TurnKey/Nginx configurations if they exist
 rm -f /etc/nginx/sites-enabled/default
 rm -f /etc/nginx/sites-enabled/tkl-default
-rm -f /etc/nginx/sites-enabled/node
+rm -f /etc/nginx/sites-enabled/nodejs
 rm -f /etc/nginx/sites-enabled/app
 
 # Enable the new app configuration

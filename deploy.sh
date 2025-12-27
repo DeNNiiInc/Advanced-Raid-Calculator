@@ -13,6 +13,10 @@ echo "Deploying $APP_NAME..."
 # If we are running this script FROM the repo, we assume we are already in the right place or we are setting it up.
 # This script assumes it is being run inside the destination directory /var/www/advanced-raid-calculator
 
+# Generate version info
+echo "Generating version info..."
+node update-version.js
+
 # Install dependencies
 echo "Installing dependencies..."
 npm install

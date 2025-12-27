@@ -1,205 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beyond Cloud Technology - RAID Calculator</title>
-    <meta name="description"
-        content="Professional RAID calculator by Beyond Cloud Technology supporting standard RAID, Synology SHR, ZFS, and Unraid configurations with accurate usable storage calculations.">
-    <link rel="icon" type="image/png" href="Logo.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
+    <meta
+      name="description"
+      content="Professional RAID calculator by Beyond Cloud Technology supporting standard RAID, Synology SHR, ZFS, and Unraid configurations with accurate usable storage calculations."
+    />
+    <link rel="icon" type="image/png" href="Logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <header class="header">
-            <div class="header-content">
-                <h1 class="title">
-                    <img src="Logo.png" alt="BCT Logo" class="title-icon">
-                    Beyond Cloud Technology - RAID Calculator
-                </h1>
-                <p class="subtitle">Professional storage capacity planning for RAID, Synology SHR, ZFS & Unraid
-                    configurations
+      <header class="header">
+        <div class="header-content">
+          <h1 class="title">
+            <img src="Logo.png" alt="BCT Logo" class="title-icon" />
+            Beyond Cloud Technology - RAID Calculator
+          </h1>
+          <p class="subtitle">
+            Professional storage capacity planning for RAID, Synology SHR, ZFS &
+            Unraid configurations
+          </p>
+          <a
+            href="https://www.youtube.com/@beyondcloudtechnology"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="youtube-link"
+          >
+            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+              />
+            </svg>
+            Watch on YouTube @beyondcloudtechnology
+          </a>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="calculator-grid">
+          <!-- Configuration Panel -->
+          <section class="config-panel card">
+            <h2 class="section-title">Configuration</h2>
+
+            <div class="form-group">
+              <label for="raid-type" class="label">RAID Type</label>
+              <select id="raid-type" class="select">
+                <optgroup label="Standard RAID">
+                  <option value="raid0">
+                    RAID 0 - Striping (No Redundancy)
+                  </option>
+                  <option value="raid1">RAID 1 - Mirroring</option>
+                  <option value="raid5" selected>RAID 5 - Single Parity</option>
+                  <option value="raid6">RAID 6 - Double Parity</option>
+                  <option value="raid10">RAID 10 - Mirrored Stripes</option>
+                </optgroup>
+                <optgroup label="Synology RAID">
+                  <option value="shr">SHR - Synology Hybrid RAID</option>
+                  <option value="shr2">
+                    SHR-2 - Synology Hybrid RAID (2-disk fault tolerance)
+                  </option>
+                </optgroup>
+                <optgroup label="ZFS RAID">
+                  <option value="zfs-stripe">ZFS Stripe (No Redundancy)</option>
+                  <option value="zfs-mirror">ZFS Mirror</option>
+                  <option value="raidz1">RAIDZ1 - Single Parity</option>
+                  <option value="raidz2">RAIDZ2 - Double Parity</option>
+                  <option value="raidz3">RAIDZ3 - Triple Parity</option>
+                </optgroup>
+                <optgroup label="Unraid">
+                  <option value="unraid-1">Unraid - 1 Parity Drive</option>
+                  <option value="unraid-2">Unraid - 2 Parity Drives</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="num-drives" class="label">Number of Drives</label>
+              <div class="input-with-display">
+                <input
+                  type="range"
+                  id="num-drives"
+                  class="slider"
+                  min="2"
+                  max="24"
+                  value="4"
+                />
+                <span id="num-drives-display" class="value-display">4</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="drive-size" class="label">Drive Size (TB)</label>
+              <select id="drive-size" class="select">
+                <option value="1">1 TB</option>
+                <option value="2">2 TB</option>
+                <option value="3">3 TB</option>
+                <option value="4">4 TB</option>
+                <option value="6">6 TB</option>
+                <option value="8">8 TB</option>
+                <option value="10">10 TB</option>
+                <option value="12" selected>12 TB</option>
+                <option value="14">14 TB</option>
+                <option value="16">16 TB</option>
+                <option value="18">18 TB</option>
+                <option value="20">20 TB</option>
+                <option value="22">22 TB</option>
+                <option value="24">24 TB</option>
+              </select>
+            </div>
+
+            <div id="zfs-vdev-config" class="form-group" style="display: none">
+              <label for="num-vdevs" class="label">Number of vdevs</label>
+              <div class="input-with-display">
+                <input
+                  type="range"
+                  id="num-vdevs"
+                  class="slider"
+                  min="1"
+                  max="8"
+                  value="2"
+                />
+                <span id="num-vdevs-display" class="value-display">2</span>
+              </div>
+              <p class="helper-text">
+                Each vdev will use the selected RAID type (mirror/RAIDZ)
+              </p>
+            </div>
+
+            <div
+              id="drives-per-vdev-config"
+              class="form-group"
+              style="display: none"
+            >
+              <label for="drives-per-vdev" class="label">Drives per vdev</label>
+              <div class="input-with-display">
+                <input
+                  type="range"
+                  id="drives-per-vdev"
+                  class="slider"
+                  min="2"
+                  max="12"
+                  value="3"
+                />
+                <span id="drives-per-vdev-display" class="value-display"
+                  >3</span
+                >
+              </div>
+              <p class="helper-text" id="total-drives-text">Total drives: 6</p>
+            </div>
+
+            <div class="form-group">
+              <label class="label">Mixed Drive Sizes</label>
+              <div class="toggle-container">
+                <input type="checkbox" id="mixed-drives" class="toggle-input" />
+                <label for="mixed-drives" class="toggle-label">
+                  <span class="toggle-slider"></span>
+                </label>
+                <span class="toggle-text"
+                  >Enable custom drive configuration</span
+                >
+              </div>
+            </div>
+
+            <div
+              id="custom-drives-container"
+              class="custom-drives-container"
+              style="display: none"
+            >
+              <div id="drive-inputs" class="drive-inputs"></div>
+            </div>
+
+            <button id="calculate-btn" class="btn-primary">
+              <svg
+                class="btn-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Calculate Storage
+            </button>
+          </section>
+
+          <!-- Results Panel -->
+          <section class="results-panel card">
+            <h2 class="section-title">Results</h2>
+
+            <div id="results-content" class="results-content">
+              <div class="empty-state">
+                <svg
+                  class="empty-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  />
+                </svg>
+                <p>
+                  Configure your RAID array and click "Calculate Storage" to see
+                  results
                 </p>
-                <a href="https://www.youtube.com/@beyondcloudtechnology" target="_blank" rel="noopener noreferrer"
-                    class="youtube-link">
-                    <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                    </svg>
-                    Watch on YouTube @beyondcloudtechnology
-                </a>
+              </div>
             </div>
-        </header>
+          </section>
+        </div>
 
-        <main class="main-content">
-            <div class="calculator-grid">
-                <!-- Configuration Panel -->
-                <section class="config-panel card">
-                    <h2 class="section-title">Configuration</h2>
-
-                    <div class="form-group">
-                        <label for="raid-type" class="label">RAID Type</label>
-                        <select id="raid-type" class="select">
-                            <optgroup label="Standard RAID">
-                                <option value="raid0">RAID 0 - Striping (No Redundancy)</option>
-                                <option value="raid1">RAID 1 - Mirroring</option>
-                                <option value="raid5" selected>RAID 5 - Single Parity</option>
-                                <option value="raid6">RAID 6 - Double Parity</option>
-                                <option value="raid10">RAID 10 - Mirrored Stripes</option>
-                            </optgroup>
-                            <optgroup label="Synology RAID">
-                                <option value="shr">SHR - Synology Hybrid RAID</option>
-                                <option value="shr2">SHR-2 - Synology Hybrid RAID (2-disk fault tolerance)</option>
-                            </optgroup>
-                            <optgroup label="ZFS RAID">
-                                <option value="zfs-stripe">ZFS Stripe (No Redundancy)</option>
-                                <option value="zfs-mirror">ZFS Mirror</option>
-                                <option value="raidz1">RAIDZ1 - Single Parity</option>
-                                <option value="raidz2">RAIDZ2 - Double Parity</option>
-                                <option value="raidz3">RAIDZ3 - Triple Parity</option>
-                            </optgroup>
-                            <optgroup label="Unraid">
-                                <option value="unraid-1">Unraid - 1 Parity Drive</option>
-                                <option value="unraid-2">Unraid - 2 Parity Drives</option>
-                            </optgroup>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="num-drives" class="label">Number of Drives</label>
-                        <div class="input-with-display">
-                            <input type="range" id="num-drives" class="slider" min="2" max="24" value="4">
-                            <span id="num-drives-display" class="value-display">4</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="drive-size" class="label">Drive Size (TB)</label>
-                        <select id="drive-size" class="select">
-                            <option value="1">1 TB</option>
-                            <option value="2">2 TB</option>
-                            <option value="3">3 TB</option>
-                            <option value="4">4 TB</option>
-                            <option value="6">6 TB</option>
-                            <option value="8">8 TB</option>
-                            <option value="10">10 TB</option>
-                            <option value="12" selected>12 TB</option>
-                            <option value="14">14 TB</option>
-                            <option value="16">16 TB</option>
-                            <option value="18">18 TB</option>
-                            <option value="20">20 TB</option>
-                            <option value="22">22 TB</option>
-                            <option value="24">24 TB</option>
-                        </select>
-                    </div>
-
-                    <div id="zfs-vdev-config" class="form-group" style="display: none;">
-                        <label for="num-vdevs" class="label">Number of vdevs</label>
-                        <div class="input-with-display">
-                            <input type="range" id="num-vdevs" class="slider" min="1" max="8" value="2">
-                            <span id="num-vdevs-display" class="value-display">2</span>
-                        </div>
-                        <p class="helper-text">Each vdev will use the selected RAID type (mirror/RAIDZ)</p>
-                    </div>
-
-                    <div id="drives-per-vdev-config" class="form-group" style="display: none;">
-                        <label for="drives-per-vdev" class="label">Drives per vdev</label>
-                        <div class="input-with-display">
-                            <input type="range" id="drives-per-vdev" class="slider" min="2" max="12" value="3">
-                            <span id="drives-per-vdev-display" class="value-display">3</span>
-                        </div>
-                        <p class="helper-text" id="total-drives-text">Total drives: 6</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="label">Mixed Drive Sizes</label>
-                        <div class="toggle-container">
-                            <input type="checkbox" id="mixed-drives" class="toggle-input">
-                            <label for="mixed-drives" class="toggle-label">
-                                <span class="toggle-slider"></span>
-                            </label>
-                            <span class="toggle-text">Enable custom drive configuration</span>
-                        </div>
-                    </div>
-
-                    <div id="custom-drives-container" class="custom-drives-container" style="display: none;">
-                        <div id="drive-inputs" class="drive-inputs"></div>
-                    </div>
-
-                    <button id="calculate-btn" class="btn-primary">
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        Calculate Storage
-                    </button>
-                </section>
-
-                <!-- Results Panel -->
-                <section class="results-panel card">
-                    <h2 class="section-title">Results</h2>
-
-                    <div id="results-content" class="results-content">
-                        <div class="empty-state">
-                            <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                            </svg>
-                            <p>Configure your RAID array and click "Calculate Storage" to see results</p>
-                        </div>
-                    </div>
-                </section>
+        <!-- Information Cards -->
+        <div class="info-grid">
+          <div class="info-card card">
+            <div class="info-icon info-icon-blue">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4m0-4h.01" />
+              </svg>
             </div>
+            <h3 class="info-title">Accurate Calculations</h3>
+            <p class="info-text">
+              Accounts for binary vs decimal differences - 12TB drives show
+              actual ~10.9TB usable capacity
+            </p>
+          </div>
 
-            <!-- Information Cards -->
-            <div class="info-grid">
-                <div class="info-card card">
-                    <div class="info-icon info-icon-blue">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M12 16v-4m0-4h.01" />
-                        </svg>
-                    </div>
-                    <h3 class="info-title">Accurate Calculations</h3>
-                    <p class="info-text">Accounts for binary vs decimal differences - 12TB drives show actual ~10.9TB
-                        usable capacity</p>
-                </div>
-
-                <div class="info-card card">
-                    <div class="info-icon info-icon-green">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
-                    <h3 class="info-title">Fault Tolerance</h3>
-                    <p class="info-text">See exactly how many drives can fail while maintaining data integrity</p>
-                </div>
-
-                <div class="info-card card">
-                    <div class="info-icon info-icon-purple">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <h3 class="info-title">Performance Insights</h3>
-                    <p class="info-text">Understand read/write performance characteristics of each RAID configuration
-                    </p>
-                </div>
+          <div class="info-card card">
+            <div class="info-icon info-icon-green">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
             </div>
-        </main>
+            <h3 class="info-title">Fault Tolerance</h3>
+            <p class="info-text">
+              See exactly how many drives can fail while maintaining data
+              integrity
+            </p>
+          </div>
 
-        <footer class="footer">
-            <p>&copy; 2025 Beyond Cloud Technology. Professional storage planning tool.</p>
-        </footer>
+          <div class="info-card card">
+            <div class="info-icon info-icon-purple">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="info-title">Performance Insights</h3>
+            <p class="info-text">
+              Understand read/write performance characteristics of each RAID
+              configuration
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p>
+          &copy; 2025 Beyond Cloud Technology. Professional storage planning
+          tool.
+        </p>
+      </footer>
     </div>
 
+    <div id="version-display"></div>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

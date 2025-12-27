@@ -1,0 +1,12 @@
+{
+  "name": "advanced-raid-calculator",
+  "version": "1.0.0",
+  "description": "Advanced RAID Calculator Deployment",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

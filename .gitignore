@@ -1,0 +1,11 @@
+# Node modules
+node_modules/
+
+# Environment variables and secrets
+.env
+config.js
+cron.log
+
+# System files
+.DS_Store
+Thumbs.db

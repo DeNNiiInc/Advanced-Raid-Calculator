@@ -17,7 +17,7 @@ if [ $LOCAL = $REMOTE ]; then
 elif [ $LOCAL = $BASE ]; then
     echo "Need to pull"
     git pull
-    # Only run deploy/restart if we actually pulled changes
+    # Re-run deploy to handle deps, service updates, and permissions
     ./deploy.sh
 elif [ $REMOTE = $BASE ]; then
     echo "Need to push"
